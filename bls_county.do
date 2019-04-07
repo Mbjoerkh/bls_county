@@ -1,13 +1,9 @@
 cd "C:\Users\marku\Desktop\bls_county"
 *** Import County-Month data from BLS ***
-import delimited la.data.county.txt , clear
-foreach var in series_id period value footnote {
-	replace `var' = strtrim((`var'))
-}
-compress
+import delimited la.data.county.txt , stringcols(1 3) clear
 
 gen statefip = substr(series_id,1,2)
-*gen fipscounty = real(substr(series_id,6,5))
+*gen fipscounty = real(substr(series_id,1,5))
 gen fipscounty = substr(series_id,1,5)
 
 gen var = substr(series_id,-1,1)
