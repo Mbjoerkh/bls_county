@@ -6,9 +6,9 @@ foreach var in series_id period value footnote {
 }
 compress
 
-gen statefip = substr(series_id,6,2)
+gen statefip = substr(series_id,1,2)
 *gen fipscounty = real(substr(series_id,6,5))
-gen fipscounty = substr(series_id,6,5)
+gen fipscounty = substr(series_id,1,5)
 
 gen var = substr(series_id,-1,1)
 replace var = "lf" if var=="6"
