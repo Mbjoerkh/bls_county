@@ -1,6 +1,12 @@
 cd "C:\Users\marku\Desktop\bls_county"
 *** Import County-Month data from BLS ***
-import delimited la.data.county.txt , stringcols(1 3) clear
+* Available at "https://download.bls.gov/pub/time.series/la/" or specifically "https://download.bls.gov/pub/time.series/la/la.data.64.County"
+import delimited la.data.county64.txt , stringcols(1 3) clear
+
+foreach var in "series_id" "period" "value" {
+	replace `var' = strtrim(`var')
+}
+replace series_id = subinstr(series_id,"LAUCN","",.)
 
 gen statefip = substr(series_id,1,2)
 *gen fipscounty = real(substr(series_id,1,5))
